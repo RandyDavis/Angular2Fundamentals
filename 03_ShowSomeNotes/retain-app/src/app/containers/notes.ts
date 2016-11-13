@@ -15,7 +15,7 @@ import { Component } from '@angular/core';
             <div class="col-xs-6 creator">note creator here</div>
             <div class="notes col-xs-8">
                 <div class="row between-xs">
-                    <note-card class="col-xs-4" [note]="note"></note-card>
+                    <note-card class="col-xs-4" [note]="note" *ngFor="let note of notes; let i = index" (checked)="onNoteChecked(i)"></note-card>
                 </div>
             </div>
         </div>       
@@ -23,5 +23,13 @@ import { Component } from '@angular/core';
 })
 
 export class NotesContainer {
-    note = { title: "this is a note", value: "eat some food", color: 'lightblue'}
+    notes = [
+        { title: "Hungry?", value: "eat some food", color: 'lightblue'},
+        { title: "Cook", value: "cook some food", color: 'red'},
+        { title: "Digest", value: "digest the food", color: 'lightyellow'}
+    ]
+
+    onNoteChecked(i: number) {
+        this.notes.splice(i, 1);
+    }
 }
